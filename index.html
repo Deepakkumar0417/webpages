@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Details</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .form-container {
+      text-align: center;
+      width: 80%;
+      max-width: 800px;
+    }
+
+    .description-box {
+      padding: 15px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      display: none;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form-container">
+    <img src="amritalogo.png" class="img-fluid my-4" height="100" alt="Welcome to Amrita" />
+    <h3 class="mb-4">Enter your Details</h3>
+
+    <form action="/action_page.php" class="border p-4 shadow-sm bg-white">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="fname">First Name</label>
+          <input type="text" class="form-control" id="fname" name="fname">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="lname">Last name</label>
+          <input type="text" class="form-control" id="lname" name="lname">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="Regno">Reg. No</label>
+          <input type="text" class="form-control" id="Regno" name="Regno">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="Phno">Phone no.</label>
+          <input type="text" class="form-control" id="Phno" name="Phno">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="sem">Semester</label>
+          <input type="number" class="form-control" id="sem" name="sem">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="gpa">CGPA</label>
+          <input type="number" class="form-control" id="gpa" name="gpa">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="pic">Photo</label>
+          <input type="file" class="form-control-file" id="pic" name="pic">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="res">Resume</label>
+        <input type="file" class="form-control-file" id="res" name="res">
+      </div>
+
+      <div class="form-group">
+        <h3>Select your Program</h3>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="btech" name="Program" value="HTML">
+          <label class="form-check-label" for="btech">B.Tech</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="mtech" name="Program" value="HTML">
+          <label class="form-check-label" for="mtech">M.Tech</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h3>Select your Branch</h3>
+        <select id="Branch" class="form-control" name="branch" size="5" multiple onchange="showDescription()">
+          <option value="CSE">CSE</option>
+          <option value="AIE">AIE</option>
+          <option value="DS">DS</option>
+          <option value="ECE">ECE</option>
+          <option value="EEE">EEE</option>
+          <option value="MEE">MEE</option>
+        </select>
+      </div>
+
+      <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+
+    <!-- Description Box -->
+    <div class="description-box mt-4" id="branchDescription">
+      <h3>Branch Description</h3>
+      <p id="descriptionText">Please select a branch to see the description.</p>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function showDescription() {
+      var branchSelect = document.getElementById("Branch");
+      var selectedBranch = branchSelect.value;
+      var descriptionBox = document.getElementById("branchDescription");
+      var descriptionText = document.getElementById("descriptionText");
+
+      // Descriptions for each branch
+      var descriptions = {
+        "CSE": "Computer Science and Engineering focuses on software development, algorithms, and system design.",
+        "AIE": "Artificial Intelligence and Engineering involves creating intelligent systems that learn and adapt.",
+        "DS": "Data Science covers the study of large data sets, extracting insights, and applying them to solve problems.",
+        "ECE": "Electronics and Communication Engineering emphasizes communication systems, electronics, and signal processing.",
+        "EEE": "Electrical and Electronics Engineering focuses on electrical systems, circuits, and power generation.",
+        "MEE": "Mechanical Engineering deals with the design, analysis, and manufacturing of mechanical systems."
+      };
+
+      // Show the relevant description
+      if (selectedBranch in descriptions) {
+        descriptionText.innerText = descriptions[selectedBranch];
+        descriptionBox.style.display = "block";
+      } else {
+        descriptionText.innerText = "Please select a branch to see the description.";
+        descriptionBox.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+
+</html>
